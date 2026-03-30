@@ -36,15 +36,23 @@ for i in range(10):
 print_sep()
 
 # Распределение для сферы
-n = Vector(0, 0, 1)
 center = Vector(0, 0, 0)
 radius = 5
-circle_dots = sphere_distribution(random, radius, center, 100_000)
+sphere_dots = sphere_distribution(random, radius, center, 100_000)
 print("Распределение для сферы")
 print("Первые 10 точек:")
 for i in range(10):
-    print(circle_dots[i])
+    print(sphere_dots[i])
 
 print_sep()
 
-# TODO: Косинусное распределение
+# Косинусное распределение
+n = Vector(0, 0, 1)
+c = Vector(0, 0, 0)
+radius = 5
+cos_dots = cos_distribution(random, n, c, radius, 100_000)
+print("Косинусное распределение")
+print("Первые 10 точек:")
+for i in range(10):
+    print(cos_dots[i])
+print_sep()
