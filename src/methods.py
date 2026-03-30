@@ -48,3 +48,18 @@ def circle_distribution(random, n, radius, center, dots_count):
         dots.append(p)
 
     return dots
+
+
+def sphere_distribution(random, radius, center, dots_count):
+    """Равномерное распределение на поверхности сферы"""
+    dots = []
+    for i in range(dots_count):
+        xi_phi = random.random()
+        xi_h = random.random()
+
+        phi = 2 * pi * xi_phi
+        h = radius * (2 * xi_h - 1)
+        p_uvh = Vector(sqrt(max(0, radius ** 2 - h ** 2)) * cos(phi), sqrt(max(0, radius ** 2 - h ** 2)) * sin(phi), h)
+        p = center + p_uvh
+        dots.append(p)
+    return dots
