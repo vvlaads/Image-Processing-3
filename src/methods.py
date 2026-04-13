@@ -65,34 +65,20 @@ def sphere_distribution(random, radius, center, dots_count):
     return dots
 
 
-def cos_distribution(random, n, c, radius, dots_count):
+def cos_distribution(random, n, radius, dots_count):
     """Косинусное распределение направлений на сфере из точки на поверхности"""
-    w = n.normalize()
-
-    if abs(w.x) > 0.1:
-        a = Vector(0, 1, 0)
-    else:
-        a = Vector(1, 0, 0)
-
-    u = w.vec_mul(a).normalize()
-    v = w.vec_mul(u)
-
     dots = []
+    n = n.normalize()
+    for i in range(dots_count):
+        xi_phi = random.random()
+        xi_h = random.random()
 
-    for _ in range(dots_count):
-        xi1 = random.random()
-        xi2 = random.random()
-
-        phi = 2 * pi * xi1
-        r = sqrt(xi2)
-
-        x = r * cos(phi)
-        y = r * sin(phi)
-        z = sqrt(1 - xi2)
-
-        direction = u * x + v * y + w * z
-
-        p = c + direction * 2 * radius * (n.dot(direction))
+        phi = 2 * pi * xi_phi
+        h = radius * (2 * xi_h - 1)
+        p_uvh = Vector(sqrt(max(0, radius ** 2 - h ** 2)) * cos(phi), sqrt(max(0, radius ** 2 - h ** 2)) * sin(phi), h)
+        p = p_uvh
+        p = p.normalize()
+        p = n + p
+        p = p.normalize()
         dots.append(p)
-
     return dots

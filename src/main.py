@@ -36,8 +36,8 @@ sphere_test(radius, center, sphere_dots)
 print_sep()
 
 # Косинусное распределение
-n = Vector(0, 0, 1)
-c = Vector(0, 0, 0)
+n = Vector(0, 2, 1)
 radius = 5
-cos_dots = cos_distribution(random, n, c, radius, 100_000)
+cos_dots = cos_distribution(random, n, radius, 100_000)
+cos_test(n, cos_dots)
 print_sep()

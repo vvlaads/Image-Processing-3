@@ -126,3 +126,19 @@ def sphere_test(radius, center, dots):
 
 def sphere_surface_square(r):
     return 4 * math.pi * r ** 2
+
+
+def cos_test(n, dots, parts=10):
+    """Численный тест косинусного распределения"""
+    n = n.normalize()
+    slices = [0] * parts
+    for p in dots:
+        p = p.normalize()
+        cos_theta = n.dot(p)
+        for i in range(1, parts + 1):
+            if cos_theta < (i / parts):
+                slices[i - 1] += 1
+                break
+    for i in range(1, parts + 1):
+        print(f"Значение косинуса: {i / parts};"
+              f" Количество точек: {slices[i - 1]}")
