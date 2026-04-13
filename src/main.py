@@ -32,6 +32,7 @@ print_sep()
 center = Vector(0, 0, 0)
 radius = 5
 sphere_dots = sphere_distribution(random, radius, center, 100_000)
+sphere_test(radius, center, sphere_dots)
 print_sep()
 
 # Косинусное распределение

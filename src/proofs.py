@@ -33,7 +33,10 @@ def triangle_test(v1, v2, v3, dots, parts=10):
 
     for i in range(parts):
         print(
-            f"Полоска {i + 1}: {slices[i]} точек; Площадь: {squares[i]: .4f}; Отношение: {slices[i] / squares[i] : .4f}")
+            f"Полоска {i + 1}: {slices[i]} точек; "
+            f"Площадь: {squares[i]: .4f}; "
+            f"Отношение: {slices[i] / squares[i] : .4f}"
+        )
 
 
 def triangle_area(a, b, c):
@@ -91,3 +94,35 @@ def in_circle(n, r, center, dot, eps=1e-6):
 
 def circle_area(r):
     return math.pi * r ** 2
+
+
+def sphere_test(radius, center, dots):
+    """Численный тест равномерности точек на поверхности сферы"""
+
+    sectors = [0] * 8
+    for p in dots:
+        idx = 0
+
+        if p.x > center.x:
+            idx += 1
+        if p.y > center.y:
+            idx += 2
+        if p.z > center.z:
+            idx += 4
+
+        sectors[idx] += 1
+
+    # площадь поверхности всей сферы
+    s_total = sphere_surface_square(radius)
+
+    squares = [s_total / 8] * 8
+    for i in range(len(sectors)):
+        print(
+            f"Сектор {i + 1}: {sectors[i]} точек; "
+            f"Площадь: {squares[i]: .4f}; "
+            f"Отношение: {sectors[i] / squares[i]: .4f}"
+        )
+
+
+def sphere_surface_square(r):
+    return 4 * math.pi * r ** 2
