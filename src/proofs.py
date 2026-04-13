@@ -37,6 +37,7 @@ def triangle_test(v1, v2, v3, dots, parts=10):
             f"Площадь: {squares[i]: .4f}; "
             f"Отношение: {slices[i] / squares[i] : .4f}"
         )
+    print(f"Общее отношение: {len(dots) / s_total}")
 
 
 def triangle_area(a, b, c):
@@ -83,6 +84,7 @@ def circle_test(n, radius, center, dots, parts=10):
             f"Площадь: {squares[i]: .4f}; "
             f"Отношение: {slices[i] / squares[i]: .4f}"
         )
+    print(f"Общее отношение: {len(dots) / s_total}")
 
 
 def in_circle(n, r, center, dot, eps=1e-6):
@@ -122,6 +124,7 @@ def sphere_test(radius, center, dots):
             f"Площадь: {squares[i]: .4f}; "
             f"Отношение: {sectors[i] / squares[i]: .4f}"
         )
+    print(f"Общее отношение: {len(dots) / s_total}")
 
 
 def sphere_surface_square(r):
@@ -140,5 +143,7 @@ def cos_test(n, dots, parts=10):
                 slices[i - 1] += 1
                 break
     for i in range(1, parts + 1):
-        print(f"Значение косинуса: {i / parts};"
-              f" Количество точек: {slices[i - 1]}")
+        print(f"Значение косинуса: {i / parts}; "
+              f"Количество точек: {slices[i - 1]}; "
+              f"Отношение к общему числу: {slices[i - 1] / len(dots): .4f}; "
+              f"Ожидание: {(i / parts) ** 2 - ((i - 1) / parts) ** 2: .4f}")
