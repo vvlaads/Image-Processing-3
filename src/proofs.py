@@ -31,13 +31,16 @@ def triangle_test(v1, v2, v3, dots, parts=10):
         strip_area = s_total * (a1 ** 2 - a0 ** 2)
         squares.append(strip_area)
 
+    target_ratio = len(dots) / s_total
     for i in range(parts):
+        current_ratio = slices[i] / squares[i]
         print(
             f"Полоска {i + 1}: {slices[i]} точек; "
             f"Площадь: {squares[i]: .4f}; "
-            f"Отношение: {slices[i] / squares[i] : .4f}"
+            f"Отношение: {current_ratio: .4f}; "
+            f"Ошибка: {abs(target_ratio - current_ratio) * 100 / target_ratio:.2f}%"
         )
-    print(f"Общее отношение: {len(dots) / s_total}")
+    print(f"Общее отношение: {target_ratio:.4f}")
 
 
 def triangle_area(a, b, c):
@@ -78,13 +81,18 @@ def circle_test(n, radius, center, dots, parts=10):
         strip_area = s_total * (r_outer ** 2 - r_inner ** 2)
         squares.append(strip_area)
 
+    target_ratio = len(dots) / s_total
+
     for i in range(parts):
+        current_ratio = slices[i] / squares[i]
+
         print(
             f"Кольцо {i + 1}: {slices[i]} точек; "
             f"Площадь: {squares[i]: .4f}; "
-            f"Отношение: {slices[i] / squares[i]: .4f}"
+            f"Отношение: {current_ratio}; "
+            f"Ошибка: {abs(target_ratio - current_ratio) * 100 / target_ratio:.2f}%"
         )
-    print(f"Общее отношение: {len(dots) / s_total}")
+    print(f"Общее отношение: {target_ratio:.4f}")
 
 
 def in_circle(n, r, center, dot, eps=1e-6):
@@ -118,13 +126,19 @@ def sphere_test(radius, center, dots):
     s_total = sphere_surface_square(radius)
 
     squares = [s_total / 8] * 8
+
+    target_ratio = len(dots) / s_total
+
     for i in range(len(sectors)):
+        current_ratio = sectors[i] / squares[i]
+
         print(
             f"Сектор {i + 1}: {sectors[i]} точек; "
             f"Площадь: {squares[i]: .4f}; "
-            f"Отношение: {sectors[i] / squares[i]: .4f}"
+            f"Отношение: {current_ratio: .4f}; "
+            f"Ошибка: {abs(target_ratio - current_ratio) * 100 / target_ratio:.2f}%"
         )
-    print(f"Общее отношение: {len(dots) / s_total}")
+    print(f"Общее отношение: {target_ratio:.4f}")
 
 
 def sphere_surface_square(r):
