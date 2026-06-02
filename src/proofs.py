@@ -146,18 +146,26 @@ def sphere_surface_square(r):
 
 
 def cos_test(n, dots, parts=10):
-    """Численный тест косинусного распределения"""
     n = n.normalize()
-    slices = [0] * parts
+
+    xis = []
+
     for p in dots:
-        p = p.normalize()
-        cos_theta = n.dot(p)
-        for i in range(1, parts + 1):
-            if cos_theta < (i / parts):
-                slices[i - 1] += 1
-                break
+        cos_theta = n.dot(p.normalize())
+        xi = 1 - cos_theta ** 2
+        xis.append(xi)
+
     for i in range(1, parts + 1):
-        print(f"Значение косинуса: {i / parts}; "
-              f"Количество точек: {slices[i - 1]}; "
-              f"Отношение к общему числу: {slices[i - 1] / len(dots): .4f}; "
-              f"Ожидание: {(i / parts) ** 2 - ((i - 1) / parts) ** 2: .4f}")
+        xi_i = i / parts
+
+        real_count = sum(x <= xi_i for x in xis)
+        expected_count = len(dots) * xi_i
+
+        error = abs(real_count - expected_count) / expected_count * 100
+
+        print(
+            f"ξ={xi_i:.1f}; "
+            f"N={real_count}; "
+            f"Ожидание={expected_count:.0f}; "
+            f"Ошибка={error:.2f}%"
+        )
